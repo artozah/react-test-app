@@ -2,7 +2,7 @@ import React from 'react';
 import Header from './common/Header';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {signOut} from '../redux/actions';
+import actions from '../redux/actions';
 
 class Layout extends React.Component {
 
@@ -10,11 +10,16 @@ class Layout extends React.Component {
     super(props, context);
   }
 
+  signOut(event) {
+    event.preventDefault();
+    this.props.actions.signOut();
+  }
+
   render() {
     const {actions, auth, user} = this.props;
     return (
       <div className="container-fluid">
-        <Header signOut={actions.signOut} auth={auth} user={user} />
+        <Header signOut={this.signOut.bind(this)} auth={auth} user={user} />
         {this.props.children}
       </div>
     );
@@ -37,7 +42,7 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators({signOut}, dispatch)
+    actions: bindActionCreators(actions, dispatch)
   };
 }
 

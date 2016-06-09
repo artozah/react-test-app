@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {userCreated, authLoggedIn} from '../../redux/actions';
+import actions from '../../redux/actions';
 import AuthForm from './AuthForm';
 
 export class AuthPage extends React.Component {
@@ -12,12 +12,12 @@ export class AuthPage extends React.Component {
       user: {
         email: "",
         password: ""
-      },
-      saving: false
+      }
     };
 
     this.updateUserState = this.updateUserState.bind(this);
-    this.createUser = this.createUser.bind(this);
+    this.signinUser = this.signinUser.bind(this);
+    this.loginUser = this.loginUser.bind(this);
   }
 
   updateUserState(event) {
@@ -29,13 +29,12 @@ export class AuthPage extends React.Component {
 
   signinUser(event) {
     event.preventDefault();
-
     this.props.actions.userCreated(this.state.user);
+    this.props.actions.authLoggedIn(this.state.user);
   }
 
   loginUser(event) {
     event.preventDefault();
-
     this.props.actions.authLoggedIn(this.state.user);
   }
 
@@ -45,7 +44,6 @@ export class AuthPage extends React.Component {
         onChange={this.updateUserState}
         onSignin={this.signinUser}
         onLogin={this.loginUser}
-        saving={this.state.saving}
         user={this.state.user}
       />
     );
@@ -66,7 +64,7 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators({signinUser, loginUser}, dispatch)
+    actions: bindActionCreators(actions, dispatch)
   };
 }
 

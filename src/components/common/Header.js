@@ -5,7 +5,7 @@ import LogoutLink from './LogoutLink';
 
 const Header = ({signOut, auth, user}) => {
 
-    let loginLogoutLink = auth.isLogged ? <LogoutLink signOut={signOut} /> : <LoginLink />;
+  let loginLogoutLink = auth.isLogged ? <LogoutLink signOut={signOut} /> : <LoginLink />;
 
   return (
     <nav>
@@ -19,7 +19,7 @@ const Header = ({signOut, auth, user}) => {
 };
 
 Header.propTypes = {
-  signOut: React.PropTypes.object.isRequired,
+  signOut: React.PropTypes.func.isRequired,
   auth: React.PropTypes.object.isRequired,
   user: React.PropTypes.object.isRequired
 };

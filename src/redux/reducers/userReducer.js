@@ -1,12 +1,13 @@
-let userReducer = function(user = {}, action) {
+import initialState from './initialState';
+
+let userReducer = function(state = initialState.user, action) {
   switch (action.type) {
-    case 'CREATE_USER':
+    case 'USER_CREATED':
       return {
-        username: user.username,
         id: action.id
       }
     default: 
-      return user;
+      return state;
   }
 };
 

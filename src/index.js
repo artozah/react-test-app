@@ -5,14 +5,7 @@ import configureStore from './redux/store';
 import {syncHistoryWithStore} from 'react-router-redux';
 import {browserHistory} from 'react-router';
 import { Provider } from 'react-redux';
-
-const initialState = {
-  routing: {},
-  user: {
-    username: 'artem',
-    id: 1
-  }
-};
+import initialState from './redux/reducers/initialState';
 
 const store = configureStore(initialState);
 const history = syncHistoryWithStore(browserHistory, store);

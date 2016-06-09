@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './common/Header';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import {signOut} from '../redux/actions';
 
 class Layout extends React.Component {
 
@@ -10,10 +11,10 @@ class Layout extends React.Component {
   }
 
   render() {
-    const {actions, user} = this.props;
+    const {actions, auth, user} = this.props;
     return (
       <div className="container-fluid">
-        <Header user={user} />
+        <Header signOut={actions.signOut} auth={auth} user={user} />
         {this.props.children}
       </div>
     );
@@ -23,18 +24,20 @@ class Layout extends React.Component {
 Layout.propTypes =  {
   children: React.PropTypes.object,
   actions: React.PropTypes.object.isRequired,
+  auth: React.PropTypes.object.isRequired,
   user: React.PropTypes.object.isRequired
 };
 
 function mapStateToProps(state, ownProps) {
   return {
+    auth: state.auth,
     user: state.user
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators({}, dispatch)
+    actions: bindActionCreators({signOut}, dispatch)
   };
 }
 

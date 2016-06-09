@@ -1,0 +1,8 @@
+.git
+.svn
+.DS_Store
+*~
+.*.swp
+*.log
+.idea/
+/node_modules/

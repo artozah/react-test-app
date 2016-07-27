@@ -23,5 +23,8 @@
     "webpack": "^1.12.13",
     "webpack-dev-middleware": "^1.5.1",
     "webpack-hot-middleware": "^2.6.4"
+  },
+  "devDependencies": {
+    "redux-form": "^5.3.1"
   }
 }
